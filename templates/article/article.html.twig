@@ -1,0 +1,10 @@
+{% extends 'common/base.html.twig' %}
+
+
+{% block content %}
+    <article>
+        <h2>Titre {{ article.title }}</h2>
+        <p>Catégorie {{ article.content }} </p>
+        <a href="{{ path('articles_list') }}" class="button">retour</a>
+    </article>
+{% endblock %}

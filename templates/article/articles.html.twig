@@ -1,0 +1,16 @@
+{% extends 'common/base.html.twig' %}
+
+{% block content %}
+    {% for article in articles %}
+        <article>
+            <h2>Titre : {{ article.title }}</h2>
+            {% if article.category is not null %}
+                <p> de : {{ article.category.Name }} {{ article.category.Hashtag }}</p>
+            {% else %}
+                <p>slow-work</p>
+            {% endif %}
+
+            <a href="{{ path('article', {'id':article.id}) }}" class="button">consulter</a>
+        </article>
+    {% endfor %}
+{% endblock %}
