@@ -1,0 +1,58 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    
+    {{ form_start(offerFormView) }}
+    <div class="form-center">
+       {{ form_errors(offerFormView.name) }}
+        {{ form_label(offerFormView.name) }}
+        {{ form_widget(offerFormView.name, { 'attr': {'class': 'title_input'} }) }}
+        
+    </div>
+    <div class="form-center">
+        {{ form_errors(offerFormView.description) }}
+        {{ form_label(offerFormView.description) }}
+        {{ form_widget(offerFormView.description, { 'attr': {'class': 'content_input'} }) }}
+    </div>
+    <div class="form-center">
+        {{ form_errors(offerFormView.price) }}
+        {{ form_label(offerFormView.price) }}
+        {{ form_widget(offerFormView.price, { 'attr': {'class': 'title_input'} }) }}
+    </div>
+    <div class="checkbox">
+        <div>
+            {{ form_errors(offerFormView.coffee) }}
+            {{ form_label(offerFormView.coffee) }}
+            {{ form_widget(offerFormView.coffee) }}
+        </div>
+        <div>
+            {{ form_errors(offerFormView.printer) }}
+            {{ form_label(offerFormView.printer) }}
+            {{ form_widget(offerFormView.printer) }}
+        </div>
+        <div>
+            {{ form_errors(offerFormView.wireless) }}
+            {{ form_label(offerFormView.wireless) }}
+            {{ form_widget(offerFormView.wireless) }}
+        </div>
+        <div>
+            {{ form_errors(offerFormView.locker) }}
+            {{ form_label(offerFormView.locker) }}
+            {{ form_widget(offerFormView.locker) }}
+        </div>
+        <div>
+            {{ form_errors(offerFormView.assigned_office) }}
+            {{ form_label(offerFormView.assigned_office) }}
+            {{ form_widget(offerFormView.assigned_office) }}
+        </div>
+    </div>
+    <div class="form-center">
+        {{ form_label(offerFormView.submit) }}
+        {{ form_widget(offerFormView.submit, { 'attr': {'class': 'btn'} }) }}
+    </div>
+    
+    {{ form_end(offerFormView) }}
+
+    <div><a href="{{ path('admin_offer_list')}}" class="btn">RETOUR</a></div>
+{% endblock body %}

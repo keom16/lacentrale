@@ -34,9 +34,29 @@ class Offer
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $options;
+    private $locker;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $assignedOffice;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $coffee;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $printer;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $wireless;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="offer")
@@ -89,18 +109,67 @@ class Offer
         return $this;
     }
 
-    public function getOptions(): ?string
+
+    public function getLocker(): ?bool
     {
-        return $this->options;
+        return $this->locker;
     }
 
-    public function setOptions(string $options): self
+    public function setLocker(bool $locker): self
     {
-        $this->options = $options;
+        $this->locker = $locker;
 
         return $this;
     }
 
+    public function getAssignedOffice(): ?bool
+    {
+        return $this->assignedOffice;
+    }
+
+    public function setAssignedOffice(bool $assignedOffice): self
+    {
+        $this->assignedOffice = $assignedOffice;
+
+        return $this;
+    }
+
+    public function getCoffee(): ?bool
+    {
+        return $this->coffee;
+    }
+
+    public function setCoffee(bool $coffee): self
+    {
+        $this->coffee = $coffee;
+
+        return $this;
+    }
+
+    public function getPrinter(): ?bool
+    {
+        return $this->printer;
+    }
+
+    public function setPrinter(bool $printer): self
+    {
+        $this->printer = $printer;
+
+        return $this;
+    }
+
+    public function getWireless(): ?bool
+    {
+        return $this->wireless;
+    }
+
+    public function setWireless(bool $wireless): self
+    {
+        $this->wireless = $wireless;
+
+        return $this;
+    }
+    
     /**
      * @return Collection|Booking[]
      */

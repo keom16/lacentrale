@@ -4,23 +4,23 @@
 
 {# j'utilise la fonction form_start pour insérer la balise form #}
         {{ form_start(articleFormView) }}
-        <div>
+        <div class="form-center">
 {# j'utilise les fonctions form_errors, form_label et form_widgetpour afficher respectivement les erreurs, le label et l'input pourmon champs title #}{{ form_errors(articleFormView.title) }}
         {{ form_label(articleFormView.title) }}
         {{ form_widget(articleFormView.title, { 'attr': {'class': 'title_input'} }) }}
 {# j'utilise le parametre 'attr' pour pouvoir attribuer une classe css à mon input #}
         </div>
-        <div>
+        <div class="form-center">
         {{ form_errors(articleFormView.content) }}
         {{ form_label(articleFormView.content) }}
         {{ form_widget(articleFormView.content, { 'attr': {'class': 'content_input'} }) }}
         </div>
-        <div>
+        <div class="form-center">
                 {{ form_errors(articleFormView.category) }}
                 {{ form_label(articleFormView.category) }}
                 {{ form_widget(articleFormView.category) }}
         </div>
-        <div>
+        <div class="form-center">
         {{ form_label(articleFormView.submit) }}
         {{ form_widget(articleFormView.submit, { 'attr': {'class': 'btn'} }) }}
         </div>

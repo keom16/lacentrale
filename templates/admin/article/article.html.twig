@@ -6,13 +6,13 @@
     <section class="consult_article">
     <div class="image_article"></div>
     <h1 class="title_article">{{ article.title }}</h1>
-    {#{% if article_category is not null %}
-         <div> de : {{ category.Name }} {{ category.Hashtag }}</div>
-     {% else %}
-         <div>slow-work</div>
-     {% endif %}#}
+       <p class="content_article">{% if article.category is not null %}
+            <div> catégorie : {{ article.category.Name }}</div>
+        {% else %}
+            <div>Pas de catégorie associée</div>
+        {% endif %}</p>
 
-    <p class="content_article">{{ article.content}}</p>
+        <p class="content_article">{{ article.content}}</p>
     </section>
     <a href="{{ path('admin_articles_list') }}" class="btn-return">retour</a>
 

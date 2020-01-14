@@ -1,0 +1,10 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section class="suppression">
+        <h1>Vous avez bien supprimé la formule suivante : "{{ offer.name }}"</h1>
+
+        <div><a href="{{ path('admin_offer_list')}}" class="btn">RETOUR</a></div>
+    </section>
+{% endblock body %}

@@ -242,7 +242,7 @@ footer{
 }
 /******FORMULAIRE DE CONNEXION******/
 
-form div {
+form .form-center {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -252,13 +252,13 @@ form div {
 #remember_me{
     margin-top: 10px;
 }
-form div div label {
+form .form-center div label {
     margin: 10px;
     font-size: 30px;
     font-family: 'GeosansLight';
 }
 
-form div div input {
+form .form-center div input {
     width: 30%;
     height: 30px;
 }
@@ -320,7 +320,7 @@ section h1{
     font-size: 30px;
 }
 
-.list_row, .list_title{
+.list_row, .list_title, .list_title_formule{
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -417,4 +417,53 @@ section h1{
 .btn:hover {
     background-color: #2F2E33;
     border: 1px solid #2F2E33;
+}
+
+/******PAGE AJOUT FORMULE******/
+
+.checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/******PAGE ADMIN FORMULE******/
+
+
+.list_title_formule h2:nth-child(1){
+    width: 160px;
+}
+
+.list_title_formule h2:nth-child(2){
+    width: 160px;
+}
+
+.list_title_formule h2:nth-child(3){
+    width: 500px;
+}
+
+.list_title_formule h2:nth-child(4){
+    width: 170px;
+}
+
+.list_title_formule h2:nth-child(5){
+    width: 150px;
+}
+
+.option_col{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+}
+
+.picto-container{
+    width: 30px;
+}
+
+.img-fluid{
+    width: 100%;
 }

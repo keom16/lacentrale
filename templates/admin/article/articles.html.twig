@@ -28,9 +28,9 @@
             <div class="title_col">{{ article.title }}</div>
             <div class="cat_col">
                 {% if article.category is not null %}
-                    <div> de : {{ article.category.Name }}</div>
+                    <div>{{ article.category.Name }}</div>
                 {% else %}
-                    <div>slow-work</div>
+                    <div>Pas de catégorie associée</div>
                 {% endif %}
             </div>
 

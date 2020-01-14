@@ -1,0 +1,77 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section class="ajout">
+        <div>
+            <h1>Ajouter un nouvelle formule</h1>
+            <a href="{{ path('admin_offer_insert_form') }}" class="btn">AJOUTER</a>
+        </div>
+    </section>
+
+    <section>
+        <h1>Gestion des Formules</h1>
+        <div class="list_title_formule">
+            <h2>Photos</h2>
+            <h2>Nom</h2>
+            <h2>Description</h2>
+            <h2>Prix</h2>
+            <h2>Options</h2>
+        </div>
+
+        {% for offer in offers %}
+            <div class="list_row">
+                <div class="img_col"><p>test</p></div>
+                <div class="title_col">{{ offer.name }}</div>
+                <div class="content_col">{{ offer.description | slice(0, 50) }}</div>
+                <div class="title_col">{{ offer.price }}€ HT</div>
+                <div class="option_col">
+                    {% if offer.coffee %}
+                        <div class="detail-container">
+                            <div class="picto-container">
+                                <img src="{{ asset('assets/img/food.png') }}" alt="café" title="café" class="img-fluid">
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    {% if offer.printer %}
+                        <div class="detail-container">
+                            <div class="picto-container">
+                                <img src="{{ asset('assets/img/print.png') }}" alt="imprimante" title="imprimante" class="img-fluid">
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    {% if offer.wireless %}
+                        <div class="detail-container">
+                            <div class="picto-container">
+                                <img src="{{ asset('assets/img/router.png') }}" alt="wifi" title="wifi" class="img-fluid">
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    {% if offer.locker %}
+                        <div class="detail-container">
+                            <div class="picto-container">
+                                <img src="{{ asset('assets/img/closet.png') }}" alt="casier" title="casier" class="img-fluid">
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if offer.assignedOffice %}
+                        <div class="detail-container">
+                            <div class="picto-container">
+                                <img src="{{ asset('assets/img/desk.png') }}" alt="bureau" title="bureau" class="img-fluid">
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div><a href="{{ path('admin_offer', {'id':offer.id}) }}" class="btn">CONSULTER</a></div>
+                <div><a href="{{ path('admin_offer_update', {'id':offer.id} )}}" class="btn">MODIFIER</a></div>
+                <div><a href="{{ path('admin_offer_delete', {'id':offer.id}) }}" class="btn">SUPPRIMER</a></div>
+            </div>
+        {% endfor %}
+
+    </section>
+
+
+{% endblock %}

@@ -6,19 +6,19 @@
         <h1>MOFIFIER</h1>
 
         {{ form_start(categoryFormView) }}
-        <div>
+        <div class="form-center">
             {{ form_errors(categoryFormView.name) }}
             {{ form_label(categoryFormView.name) }}
             {{ form_widget(categoryFormView.name, { 'attr': {'class': 'title_input'} }) }}
         </div>
 
-        <div>
+        <div class="form-center">
             {{ form_label(categoryFormView.submit) }}
             {{ form_widget(categoryFormView.submit, { 'attr': {'class': 'btn'} }) }}
         </div>
         {{ form_end(categoryFormView) }}
     </section>
 
-    <div><a href="{{ path('admin_articles_list')}}" class="btn">RETOUR</a></div>
+    <div><a href="{{ path('admin_categories_list')}}" class="btn">RETOUR</a></div>
 
 {% endblock %}

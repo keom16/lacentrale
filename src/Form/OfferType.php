@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Offer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,14 +23,33 @@ class OfferType extends AbstractType
                 'required' => true
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Contenu',
                 'required' => true
             ])
-            ->add('price', MoneyType::class, [
+            ->add('price', IntegerType::class, [
                 'label' => 'Tarif'
             ])
-            ->add('options', ChoiceType::class, [
-                
+            ->add('coffee', CheckboxType::class, [
+                'label' => 'Café',
+                'required' => false
+            ])
+            ->add('printer', CheckboxType::class, [
+                'label' => 'Imprimante',
+                'required' => false
+            ])
+            ->add('wireless', CheckboxType::class, [
+                'label' => 'Wifi',
+                'required' => false
+            ])
+            ->add('locker', CheckboxType::class, [
+                'label' => 'Casier',
+                'required' => false
+            ])
+            ->add('assigned_office', CheckboxType::class, [
+                'label' => 'Bureau assigné',
+                'required' => false
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Soumettre'
             ])
         ;
     }
