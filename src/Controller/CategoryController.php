@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_categorys_list');
+            return $this->redirectToRoute('admin_categories_list');
         }
 
         return $this->render('admin/category/new.html.twig', [
@@ -123,7 +123,7 @@ class CategoryController extends AbstractController
                 $entityManager->persist($category);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('admin_categorys_list');
+                return $this->redirectToRoute('admin_categories_list');
             }
 
         }
@@ -137,7 +137,7 @@ class CategoryController extends AbstractController
 
 
     /**
-     * @Route("/admin-lacentrale/{id}", name="admin_category_delete", methods={"DELETE"})
+     * @Route("/admin-lacentrale/{id}", name="admin_category_delete")
      */
 
     public function deleteCategory(categoryRepository $categoryRepository, EntityManagerInterface $entityManager, $id)

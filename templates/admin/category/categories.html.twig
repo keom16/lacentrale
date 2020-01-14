@@ -1,7 +1,7 @@
 {% extends 'common/admin.html.twig' %}
 
 {% block body %}
-
+    <a href="{{ path('admin_articles_list') }}" class="btn-return">RETOUR</a>
     <section class="ajout">
         <div>
             <h1>Ajouter une nouvelle catégorie</h1>
@@ -20,7 +20,7 @@
                 <div class="title_col">{{ category.name }}</div>
                 <div class="cat_col">
                     {% for article in category.getArticle() %}
-                        {{ article.title }} /
+                        {{ article.title }}
                     {% endfor %}
                 </div>
                 <div><a href="{{ path('admin_category_update', {'id':category.id} )}}" class="btn">MODIFIER</a></div>
