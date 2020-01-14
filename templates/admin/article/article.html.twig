@@ -3,16 +3,17 @@
 {% block body %}
 
 
-    <div class="list_row">
-    <div class="img_col"></div>
-    <div class="title_col">{{ article.title }}</div>
-    {# {% if article.category is not null %}
-         <div> de : {{ article.category.Name }} {{ article.category.Hashtag }}</div>
+    <section class="consult_article">
+    <div class="image_article"></div>
+    <h1 class="title_article">{{ article.title }}</h1>
+    {#{% if article_category is not null %}
+         <div> de : {{ category.Name }} {{ category.Hashtag }}</div>
      {% else %}
          <div>slow-work</div>
      {% endif %}#}
 
-    <div class="content_col">{{ article.content}}</div>
-    <div><a href="{{ path('admin_articles_list') }}" class="btn">retour</a></div>
+    <p class="content_article">{{ article.content}}</p>
+    </section>
+    <div class="retour_article"><a href="{{ path('admin_articles_list') }}">retour</a></div>
 
 {% endblock body %}

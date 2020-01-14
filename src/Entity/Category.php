@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +24,18 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
-    private $hashtag;
+    private $article;
+    /**
+     * @var array
+     */
+    private $articles;
+
+    public function __construct()
+    {
+        $this->article = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -43,15 +54,15 @@ class Category
         return $this;
     }
 
-    public function getHashtag(): ?string
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticle()
     {
-        return $this->hashtag;
+        return $this->article;
     }
 
-    public function setHashtag(string $hashtag): self
-    {
-        $this->hashtag = $hashtag;
 
-        return $this;
-    }
+
+
 }

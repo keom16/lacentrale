@@ -1,0 +1,28 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section class="new_categorie">
+        <h1>AJOUTER UNE NOUVELLE OFFRE</h1>
+
+        {{ form_start(categoryFormView) }}
+        <div>
+            {{ form_errors(categoryFormView.name) }}
+            {{ form_label(categoryFormView.name) }}
+            {{ form_widget(categoryFormView.name, { 'attr': {'class': 'title_input'} }) }}
+        </div>
+        <div>
+            {{ form_errors(categoryFormView.hashtag) }}
+            {{ form_label(categoryFormView.hashtag) }}
+            {{ form_widget(categoryFormView.hashtag, { 'attr': {'class': 'title_input'} }) }}
+        </div>
+        <div>
+            {{ form_label(categoryFormView.submit) }}
+            {{ form_widget(categoryFormView.submit, { 'attr': {'class': 'btn'} }) }}
+        </div>
+        {{ form_end(categoryFormView) }}
+    </section>
+
+    <div><a href="{{ path('admin_articles_list')}}" class="btn">RETOUR</a></div>
+
+{% endblock %}

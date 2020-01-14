@@ -2,7 +2,9 @@
 
 {% block body %}
 
+    <section class="suppression">
+    <h1>Vous avez bien supprimé l'article dont le titre est "{{ article.title }}"</h1>
 
-    <h1>Vous avez bien supprimé</h1>
-
+    <div><a href="{{ path('admin_articles_list')}}" class="btn">RETOUR</a></div>
+    </section>
 {% endblock body %}

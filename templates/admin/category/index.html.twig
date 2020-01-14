@@ -9,7 +9,6 @@
         {% for category in categories %}
 
                 <p>{{ category.name }}</p>
-                <p>{{ category.hashtag }}</p>
 
                 <div class="btn-align">
                     <imput type="button" class="btn"><a href="{{ path('category_show', {'id': category.id}) }}">CONSULTER<span class="jauge-remplissage"></span></a></imput>

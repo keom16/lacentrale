@@ -1,0 +1,10 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section class="suppression">
+        <h1>Vous avez bien supprimé la catégorie suivante : "{{ category.name }}"</h1>
+
+        <div><a href="{{ path('admin_articles_list')}}" class="btn">RETOUR</a></div>
+    </section>
+{% endblock body %}

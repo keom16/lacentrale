@@ -16,6 +16,11 @@
         {{ form_widget(articleFormView.content, { 'attr': {'class': 'content_input'} }) }}
         </div>
         <div>
+                {{ form_errors(articleFormView.category) }}
+                {{ form_label(articleFormView.category) }}
+                {{ form_widget(articleFormView.category) }}
+        </div>
+        <div>
         {{ form_label(articleFormView.submit) }}
         {{ form_widget(articleFormView.submit, { 'attr': {'class': 'btn'} }) }}
         </div>

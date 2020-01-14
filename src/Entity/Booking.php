@@ -46,6 +46,11 @@ class Booking
      */
     private $message;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Offer", inversedBy="booking")
+     */
+    private $offer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ class Booking
     public function setMessage(?string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getOffer(): ?Offer
+    {
+        return $this->offer;
+    }
+
+    public function setOffer(?Offer $offer): self
+    {
+        $this->offer = $offer;
 
         return $this;
     }

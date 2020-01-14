@@ -1,0 +1,33 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section class="ajout">
+        <div>
+            <h1>Ajouter une nouvelle catégorie</h1>
+            <a href="{{ path('admin_category_new') }}" class="btn">AJOUTER</a>
+        </div>
+    </section>
+
+    <section>
+        <h1>Gestion des catégories</h1>
+        <div class="list_title">
+            <h2>Nom</h2>
+            <h2>Articles associés</h2>
+        </div>
+        {% for category in categories %}
+            <div class="list_row">
+                <div class="title_col">{{ category.name }}</div>
+                <div class="cat_col">
+                    {% for article in category.getArticle() %}
+                        {{ article.title }} /
+                    {% endfor %}
+                </div>
+                <div><a href="{{ path('admin_category_update', {'id':category.id} )}}" class="btn">MODIFIER</a></div>
+                <div><a href="{{ path('admin_category_delete', {'id':category.id}) }}" class="btn">SUPPRIMER</a></div>
+            </div>
+        {% endfor %}
+    </section>
+
+
+{% endblock %}

@@ -2,31 +2,42 @@
 
 {% block body %}
 
-    <section>
-        <h1>Ajouter un nouvel article</h1>
-        <a href="{{ path('admin_article_insert_form') }}" class="btn">AJOUTER</a>
+    <section class="ajout">
+        <div>
+            <h1>Ajouter un nouvel article</h1>
+            <a href="{{ path('admin_article_insert_form') }}" class="btn">AJOUTER</a>
+        </div>
+        <div>
+            <h1>Gérer les catégories d'article</h1>
+            <a href="{{ path('admin_categories_list') }}" class="btn">GERER</a>
+
+        </div>
     </section>
 
     <section>
         <h1>Gestion des articles</h1>
-        <div class="list_row">
-            <h2 class="img_col">Photos</h2>
-            <h2 class="title_col">Titre</h2>
-            <h2 class="content_col">Contenu de l'article</h2>
+        <div class="list_title">
+            <h2>Photos</h2>
+            <h2>Titre</h2>
+            <h2>Catégorie</h2>
+            <h2 class="titre_contenu">Contenu de l'article</h2>
         </div>
     {% for article in articles %}
         <div class="list_row">
-            <div class="img_col"></div>
+            <div class="img_col"><p>test</p></div>
             <div class="title_col">{{ article.title }}</div>
-            {# {% if article.category is not null %}
-                 <div> de : {{ article.category.Name }} {{ article.category.Hashtag }}</div>
-             {% else %}
-                 <div>slow-work</div>
-             {% endif %}#}
+            <div class="cat_col">
+                {% if article.category is not null %}
+                    <div> de : {{ article.category.Name }}</div>
+                {% else %}
+                    <div>slow-work</div>
+                {% endif %}
+            </div>
+
 
             <div class="content_col">{{ article.content | slice(0, 50) }}</div>
             <div><a href="{{ path('admin_article', {'id':article.id}) }}" class="btn">CONSULTER</a></div>
-            <div><a href="#" class="btn">MODIFIER</a></div>
+            <div><a href="{{ path('admin_article_update', {'id':article.id} )}}" class="btn">MODIFIER</a></div>
             <div><a href="{{ path('admin_article_delete', {'id':article.id}) }}" class="btn">SUPPRIMER</a></div>
         </div>
     {% endfor %}

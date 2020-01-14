@@ -126,6 +126,33 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/admin-lacentrale/article/update/{id}", name="admin_article_update")
+     */
+    
+    public function updateArticleForm(ArticleRepository $articleRepository, Request $request, EntityManagerInterface $entityManager, $id)
+    {
+        $article = $articleRepository->find($id);
+        $articleForm = $this->createForm(articleType::class, $article);
+        if ($request->isMethod('Post'))
+        {
+            $articleForm->handleRequest($request);
+            if ($articleForm->isValid()) {
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('admin_articles_list');
+            }
+
+        }
+
+        $articleFormView = $articleForm->createView();
+
+        return $this->render('admin/article/article_update.html.twig', [
+            'articleFormView' => $articleFormView
+        ]);
+    }
+
+    /**
      * @Route("/admin-lacentrale/article/delete/{id}", name="admin_article_delete")
      */
     public function deleteArticle(ArticleRepository $articleRepository, EntityManagerInterface $entityManager, $id)

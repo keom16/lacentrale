@@ -15,19 +15,8 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', ChoiceType::class, [
-                'label' => 'Nom',
-                'choices' => [
-                    'actualité' => 'Actualité',
-                    'économie' => 'Economie',
-                    'local' => 'local',
-                    'tiers lieux' => 'Tiers lieux',
-                    'interview' => 'Interview'
-                ],
-                'required' => true
-            ])
-            ->add('hashtag', TextType::class, [
-                'required' => false
+            ->add('name', TextType::class, [
+                'label' => 'Nom de la catégorie'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre'
