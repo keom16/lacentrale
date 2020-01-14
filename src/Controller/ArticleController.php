@@ -15,7 +15,7 @@ class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/admin/article/insert", name="admin_article_insert_form")
+     * @Route("/admin-lacentrale/article/insert", name="admin_article_insert_form")
      */
 
     public function insertArticleForm(Request $request, EntityManagerInterface $entityManager)
@@ -45,7 +45,7 @@ class ArticleController extends AbstractController
                 $entityManager->persist($article);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('articles_list'); /**
+                return $this->redirectToRoute('admin_articles_list'); /**
  **********************************************************/
             }
 
@@ -54,7 +54,7 @@ class ArticleController extends AbstractController
         $articleFormView = $articleForm->createView();
         // je retourne un fichier twig, et je lui envoie ma variable qui contient
         // mon formulaire
-        return $this->render('article/article_form.html.twig', [
+        return $this->render('admin/article/ajout_article.html.twig', [
             'articleFormView' => $articleFormView
         ]);
     }
@@ -89,6 +89,57 @@ class ArticleController extends AbstractController
         //méthode render sui permet d'afficher mon fichier html.twig, et le résultat de ma requête SQL
         return $this->render('article/article.html.twig', [
             'article' => $article
+        ]);
+    }
+
+    /**
+     * @Route("/admin-lacentrale/articleslist", name="admin_articles_list");
+     */
+
+    //méthode qui permet de faire "un select" en BDD de l'ensemble de mes champs dans ma table Article
+    public function ArticlesAdminList(ArticleRepository $articleRepository)
+    {
+        //J'utilise le repository d'article pour pouvoir selectionner tous les élèments de ma table article
+        //Les repositorys en général servent à faire les requêtes select dans les tables
+        $articles = $articleRepository->findAll();
+
+        //méthode render sui permet d'afficher mon fichier html.twig, et le résultat de ma requête SQL
+        return $this->render('admin/article/articles.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+
+
+    /**
+     * @Route("/admin-lacentrale/article/{id}", name="admin_article");
+     */
+
+    //méthode qui permet de faire "un select" en BDD d'un id dans ma table Article
+    public function ArticleAdminList(ArticleRepository $articleRepository, $id)
+    {
+        $article = $articleRepository->find($id);
+
+        //méthode render sui permet d'afficher mon fichier html.twig, et le résultat de ma requête SQL
+        return $this->render('admin/article/article.html.twig', [
+            'article' => $article
+        ]);
+    }
+
+    /**
+     * @Route("/admin-lacentrale/article/delete/{id}", name="admin_article_delete")
+     */
+    public function deleteArticle(ArticleRepository $articleRepository, EntityManagerInterface $entityManager, $id)
+    {
+        // Je récupère un enregistrement article en BDD grâce au repository d'article
+        $article = $articleRepository->find($id);
+        // j'utilise l'entity manager avec la méthode remove pour enregistrer
+        // la suppression de l'article dans l'unité de travail
+        $entityManager->remove($article);
+        // je valide la suppression en bdd avec la méthode flush
+        $entityManager->flush();
+
+        return $this->render('admin/article/articledelete.html.twig', [
+            'article'=> $article
         ]);
     }
 

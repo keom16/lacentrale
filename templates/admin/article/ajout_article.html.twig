@@ -1,0 +1,26 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+{# j'utilise la fonction form_start pour insérer la balise form #}
+        {{ form_start(articleFormView) }}
+        <div>
+{# j'utilise les fonctions form_errors, form_label et form_widgetpour afficher respectivement les erreurs, le label et l'input pourmon champs title #}{{ form_errors(articleFormView.title) }}
+        {{ form_label(articleFormView.title) }}
+        {{ form_widget(articleFormView.title, { 'attr': {'class': 'title_input'} }) }}
+{# j'utilise le parametre 'attr' pour pouvoir attribuer une classe css à mon input #}
+        </div>
+        <div>
+        {{ form_errors(articleFormView.content) }}
+        {{ form_label(articleFormView.content) }}
+        {{ form_widget(articleFormView.content, { 'attr': {'class': 'content_input'} }) }}
+        </div>
+        <div>
+        {{ form_label(articleFormView.submit) }}
+        {{ form_widget(articleFormView.submit, { 'attr': {'class': 'btn'} }) }}
+        </div>
+        {# j'utilise la fonction form_end pour insérer la fermeture de la balise form #}
+        {{ form_end(articleFormView) }}
+
+        <div><a href="{{ path('admin_articles_list')}}" class="btn">RETOUR</a></div>
+{% endblock body %}

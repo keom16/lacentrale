@@ -1,8 +1,8 @@
-{% extends 'common/base.html.twig' %}
+{% extends 'common/admin.html.twig' %}
 
 
-{% block content %}
-    <div class="test">
+{% block body %}
+    <div class="formulaire">
 
     {#    #}{# j'utilise la fonction form_start pour insérer la balise form #}
         {{ form_start(articleFormView) }}
@@ -29,4 +29,4 @@
 
 
     </div>
-{% endblock content%}
+{% endblock body%}

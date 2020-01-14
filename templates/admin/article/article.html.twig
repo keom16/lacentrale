@@ -1,0 +1,18 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+
+    <div class="list_row">
+    <div class="img_col"></div>
+    <div class="title_col">{{ article.title }}</div>
+    {# {% if article.category is not null %}
+         <div> de : {{ article.category.Name }} {{ article.category.Hashtag }}</div>
+     {% else %}
+         <div>slow-work</div>
+     {% endif %}#}
+
+    <div class="content_col">{{ article.content}}</div>
+    <div><a href="{{ path('admin_articles_list') }}" class="btn">retour</a></div>
+
+{% endblock body %}

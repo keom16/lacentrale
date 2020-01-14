@@ -1,0 +1,36 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section>
+        <h1>Ajouter un nouvel article</h1>
+        <a href="{{ path('admin_article_insert_form') }}" class="btn">AJOUTER</a>
+    </section>
+
+    <section>
+        <h1>Gestion des articles</h1>
+        <div class="list_row">
+            <h2 class="img_col">Photos</h2>
+            <h2 class="title_col">Titre</h2>
+            <h2 class="content_col">Contenu de l'article</h2>
+        </div>
+    {% for article in articles %}
+        <div class="list_row">
+            <div class="img_col"></div>
+            <div class="title_col">{{ article.title }}</div>
+            {# {% if article.category is not null %}
+                 <div> de : {{ article.category.Name }} {{ article.category.Hashtag }}</div>
+             {% else %}
+                 <div>slow-work</div>
+             {% endif %}#}
+
+            <div class="content_col">{{ article.content | slice(0, 50) }}</div>
+            <div><a href="{{ path('admin_article', {'id':article.id}) }}" class="btn">CONSULTER</a></div>
+            <div><a href="#" class="btn">MODIFIER</a></div>
+            <div><a href="{{ path('admin_article_delete', {'id':article.id}) }}" class="btn">SUPPRIMER</a></div>
+        </div>
+    {% endfor %}
+    </section>
+
+
+{% endblock %}

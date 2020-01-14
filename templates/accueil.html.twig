@@ -2,10 +2,18 @@
 
 {% block title %}Co Working La Centrale Cognac{% endblock %}
 
-{% block content %}
-    <div class="container container-banniere">
-        <img src="{{ asset('assets/img/banniere.jpg') }}" alt="espace de co-working" class="responsive">
-    </div>
-    <div class="test"></div>
+{% block body %}
 
-{% endblock content%}
+    <section class="principale">
+        <div>
+            <h1>Co-Working La Centrale</h1>
+            <p>Situé en plein coeur de la citée des eaux de vie, le long du fleuve Charente, dans une ancienne centrale hydraulique.</p>
+            <p>Venez découvrir la centrale !</p>
+        </div>
+        <div class="btn-align">
+            <imput type="button" class="btn"><a href="">LES TARIFS<span class="jauge-remplissage"></span></a></imput>
+            <imput type="button" class="btn"><a href="">RESERVER<span class="jauge-remplissage"></span></a></imput>
+        </div>
+    </section>
+    <section class="seconde"></section>
+{% endblock body%}

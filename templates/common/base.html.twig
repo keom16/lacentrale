@@ -1,14 +1,13 @@
-
+{% include 'common/header.html.twig'%}
 
 <main>
-    {% include 'common/header.html.twig'%}
-    {% block content %}
-    {% endblock content %}
-    {% include 'common/footer.html.twig'%}
+
+    {% block body %}
+    {% endblock body %}
+
+
 </main>
 
-<footer>
-    <div class="footer"></div>
-</footer>
+{% include 'common/footer.html.twig'%}
 <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 </body>

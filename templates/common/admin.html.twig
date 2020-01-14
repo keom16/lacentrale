@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<header>
+    <div class="container-top-admin">
+        <div><a href="{{ path('accueil') }}"><img src="{{ asset('assets/img/logo-lacentrale-blue.png') }}" alt="Logo du site" class="logo-top"></a></div>
+        <div class="connect">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <nav class="nav-top-admin">
+        <ul>
+            <li><a href="{{ path('accueil') }}">Accueil</a></li>
+            <li><a href="">Reservations</a></li>
+            <li><a href="">Formules</a></li>
+            <li><a href="">Co-Workers</a></li>
+            <li><a href="{{ path('admin_articles_list') }}">Articles</a></li>
+            <li><a href="">Newsletters</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<body class="body-admin">
+{% block body %}
+{% endblock body %}
+</body>
+
+</html>
