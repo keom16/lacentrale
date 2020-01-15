@@ -69,11 +69,11 @@ class OfferController extends AbstractController
 
 
     /**
-     * @Route("/", name="offer_index", methods={"GET"})
+     * @Route("/", name="formules", methods={"GET"})
      */
     public function index(OfferRepository $offerRepository): Response
     {
-        return $this->render('offer/index.html.twig', [
+        return $this->render('public/formule.html.twig', [
             'offers' => $offerRepository->findAll(),
         ]);
     }

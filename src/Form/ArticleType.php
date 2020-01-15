@@ -27,7 +27,7 @@ class ArticleType extends AbstractType
                 'required' => true
             ])
             ->add('images', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'Image associée',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,

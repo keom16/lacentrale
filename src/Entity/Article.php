@@ -29,7 +29,7 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $images;
 

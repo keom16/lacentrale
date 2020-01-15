@@ -14,7 +14,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Kiona-Regular';
+    font-family: 'Kiona-Regular', sans-serif;
     font-weight: bold;
 }
 
@@ -33,7 +33,7 @@ li {
     list-style: none;
 }
 
-.body-admin{
+.body-admin, body{
     background-color: #D5D6D2;
 }
 /**** HOME ****/
@@ -44,6 +44,8 @@ li {
     position: fixed;
     z-index: 99;
     padding: 1px;
+    top: 0;
+    left: 0;
 }
 
 .nav-top {
@@ -76,6 +78,7 @@ li {
     padding: 21px;
 }
 
+/******** PAGE ACCUEIL **********/
 .principale{
     background-image: url("../img/banniere.png");
     background-position: center;
@@ -83,7 +86,7 @@ li {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    top: 143px;
+    top: 114px;
     left: 0px;
 }
 
@@ -106,11 +109,6 @@ li {
     font-size: 20px;
 }
 
-.seconde{
-    height: 500px;
-    width: 100%;
-    background-color: #718C00;
-}
 .btn-align{
     display: flex;
     align-items: center;
@@ -129,13 +127,49 @@ li {
     color: #ffffff;
 }
 
+.title-home{
+    margin: 200px 0 50px 0;
+    font-size: 50px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.suite{
+    width: 80%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.container-home{
+    background-color: #3A5199;
+    width: 45%;
+    height: 400px;
+    padding: 100px 50px;
+    margin: 0 10px;
+}
+
+.container-home h1{
+    margin: 0;
+}
+
+.container-pic-home{
+    width: 45%;
+    height: 400px;
+    margin: 0 10px;
+}
+
 .btn:hover {
     background-color: #2F2E33;
     border: 1px solid #2F2E33;
 }
 
+/******* BONTON CONTACTEZ-NOUS*******/
+
 .contact{
-    background-color: #3A5199;
+    background-color: #2F2E33;
     width: 13%;
     font-size: 20px;
     padding: 10px;
@@ -146,12 +180,14 @@ li {
     color: #ffffff;
 }
 
+/******* FOOTER *******/
+
 footer{
     display: flex;
     justify-content: center;
     width: 100%;
     height: 300px;
-    background-color: #3A5199;
+    background-color: #5d5757;
     padding-top: 50px;
     font-size: 20px;
     font-weight: bold;
@@ -240,6 +276,7 @@ footer{
     padding:0 30px;
     text-transform: uppercase;
 }
+
 /******FORMULAIRE DE CONNEXION******/
 
 form .form-center {
@@ -255,7 +292,7 @@ form .form-center {
 form .form-center div label {
     margin: 10px;
     font-size: 30px;
-    font-family: 'GeosansLight';
+    font-family: 'GeosansLight', sans-serif;
 }
 
 form .form-center div input {
@@ -268,7 +305,7 @@ form .form-center div input {
 .confirmation{
     width: 100%;
     text-align: center;
-    font-family: 'Kiona-Regular';
+    font-family: 'Kiona-Regular', sans-serif;
     font-size: 30px;
     margin-bottom: 60px;
 }
@@ -467,3 +504,113 @@ section h1{
 .img-fluid{
     width: 100%;
 }
+
+/******PAGE PUBLIC FORMULE******/
+
+.formule{
+    width: 100%;
+    padding-top : 200px;
+    text-align: center;
+}
+
+.formule h1{
+    font-size: 50px;
+}
+
+.container-80{
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 50px auto;
+    background-color: #3A5199;
+    padding: 20px;
+}
+
+.container-30{
+    width: 27%;
+    border: 20px solid #2F2E33;
+}
+
+.container-60{
+    width: 60%;
+    text-align: center;
+    padding: 20px;
+}
+
+.container-60 h2, .container-60 p{
+    margin: 20px 0;
+}
+
+.container-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.opt-container{
+    width: 5%;
+    margin: 0 20px;
+}
+
+.btn-formule{
+    padding: 10px;
+    margin: 20px;
+    width: 20%;
+    text-align: center;
+    background-color: #2F2E33;
+    font-size: 20px;
+    top: 120px;
+    left: 120px;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-formule:hover {
+    background-color: #3A5199;
+    border: 1px solid #3A5199;
+}
+
+.price{
+    font-size: 35px;
+}
+
+/******* PUBLIC FORMULAIRE DE RESERVATION ****/
+
+.formulaire_resa{
+    width: 80%;
+    padding-top: 200px;
+    margin: 0 auto;
+}
+
+form .form-resa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+form .res_input {
+    width: 50%;
+    height: 30px;
+}
+
+form .res_area_input{
+    width: 50%;
+    height: 200px;
+}
+
+
+/******* PUBLIC CONFIRMATION DE RESERVATION ****/
+
+.formulaire_confirm{
+    width: 80%;
+    padding : 400px 0;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.formulaire_confirm h1{
+    font-size: 50px;
+}
+

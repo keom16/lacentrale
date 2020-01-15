@@ -1,0 +1,34 @@
+{% extends 'common/admin.html.twig' %}
+
+{% block body %}
+
+    <section>
+        <h1>Gestion des Réservations</h1>
+        <div class="list_title_formule">
+            <h2>Nom</h2>
+            <h2>Prénom</h2>
+            <h2>Société</h2>
+            <h2>Téléphone</h2>
+            <h2>E-mail</h2>
+            <h2>Message</h2>
+            <h2>Formule choisie</h2>
+        </div>
+
+        {% for booking in bookings %}
+            <div class="list_row">
+                <div class="img_col">{{ booking.name}}</div>
+                <div class="title_col">{{ booking.firstname }}</div>
+                <div class="title_col">{{ booking.compagny }}</div>
+                <div class="title_col">{{ booking.phonenumber }}</div>
+                <div class="title_col">{{ booking.email }}</div>
+                <div class="content_col">{{ booking.message | slice(0, 50) }}</div>
+                <div class="title_col">{{ booking.offer.Name }}</div>
+                <div><a href="{{ path('admin_booking', {'id':booking.id}) }}" class="btn">CONSULTER</a></div>
+                <div><a href="{{ path('admin_booking_delete', {'id':booking.id}) }}" class="btn">SUPPRIMER</a></div>
+            </div>
+        {% endfor %}
+
+    </section>
+
+
+{% endblock %}

@@ -11,9 +11,23 @@
             <p>Venez découvrir la centrale !</p>
         </div>
         <div class="btn-align">
-            <imput type="button" class="btn"><a href="">LES TARIFS<span class="jauge-remplissage"></span></a></imput>
-            <imput type="button" class="btn"><a href="">RESERVER<span class="jauge-remplissage"></span></a></imput>
+            <imput type="button" class="btn"><a href="{{ path('formules') }}">LES TARIFS<span class="jauge-remplissage"></span></a></imput>
+            <imput type="button" class="btn"><a href="{{ path('booking_new') }}">RESERVER<span class="jauge-remplissage"></span></a></imput>
         </div>
     </section>
-    <section class="seconde"></section>
+
+    <h1 class="title-home">Co-Working La Centrale</h1>
+
+    {% for article in articles | slice(0, 4)%}
+        <section class="suite">
+            {% if article.id is divisible by(2) %}
+                <div class="container-home"><h1>{{ article.title }}</h1><p>{{ article.content }}</p></div>
+                <div class="container-pic-home"><img src="{{ asset('assets/uploaded_images/' ~ article.images) }}" class="img-fluid" alt=""></div>
+            {% else %}
+                <div class="container-pic-home"><img src="{{ asset('assets/uploaded_images/' ~ article.images) }}" class="img-fluid" alt=""></div>
+                <div class="container-home"><h1>{{ article.title }}</h1><p>{{ article.content }}</p></div>
+            {% endif %}
+        </section>
+    {% endfor %}
+
 {% endblock body%}

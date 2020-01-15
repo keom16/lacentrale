@@ -1,0 +1,54 @@
+{% extends 'common/base.html.twig' %}
+
+{% block body %}
+
+<section class="formulaire_resa">
+    {{ form_start(bookingFormView) }}
+    <div class="form-resa">
+        {{ form_errors(bookingFormView.name) }}
+        {{ form_label(bookingFormView.name) }}
+        {{ form_widget(bookingFormView.name, { 'attr': {'class': 'res_input'} }) }}
+
+    </div>
+    <div class="form-resa">
+        {{ form_errors(bookingFormView.firstname) }}
+        {{ form_label(bookingFormView.firstname) }}
+        {{ form_widget(bookingFormView.firstname, { 'attr': {'class': 'res_input'} }) }}
+    </div>
+    <div class="form-resa">
+        {{ form_errors(bookingFormView.compagny) }}
+        {{ form_label(bookingFormView.compagny) }}
+        {{ form_widget(bookingFormView.compagny, { 'attr': {'class': 'res_input'} }) }}
+    </div>
+        <div class="form-resa">
+            {{ form_errors(bookingFormView.phonenumber) }}
+            {{ form_label(bookingFormView.phonenumber) }}
+            {{ form_widget(bookingFormView.phonenumber, { 'attr': {'class': 'res_input'} }) }}
+        </div>
+        <div class="form-resa">
+            {{ form_errors(bookingFormView.email) }}
+            {{ form_label(bookingFormView.email) }}
+            {{ form_widget(bookingFormView.email, { 'attr': {'class': 'res_input'} }) }}
+        </div>
+        <div class="form-resa">
+            {{ form_errors(bookingFormView.message) }}
+            {{ form_label(bookingFormView.message) }}
+            {{ form_widget(bookingFormView.message, { 'attr': {'class': 'res_area_input'} }) }}
+        </div>
+        <div class="form-resa">
+            {{ form_errors(bookingFormView.offer) }}
+            {{ form_label(bookingFormView.offer) }}
+            {{ form_widget(bookingFormView.offer, { 'attr': {'class': 'res_input'} }) }}
+        </div>
+    <div class="form-resa">
+        {{ form_label(bookingFormView.submit) }}
+        {{ form_widget(bookingFormView.submit, { 'attr': {'class': 'btn'} }) }}
+    </div>
+
+    {{ form_end(bookingFormView) }}
+
+</section>
+    <button class="btn-formule"><a href="{{ path('formules')}}">RETOUR</a></button>
+
+
+{% endblock body %}

@@ -1,0 +1,62 @@
+{% extends 'common/base.html.twig' %}
+
+{% block body %}
+<section class="formule">
+    <h1>LES FORMULES</h1>
+{% for offer in offers %}
+
+    <div class="container-80">
+        <div class="container-30"><img src="{{ asset('assets/uploaded_images/' ~ offer.images) }}" alt="" class="img-fluid"></div>
+        <div class="container-60">
+            <h2>{{ offer.name }}</h2>
+            <p>{{ offer.description }}</p>
+            <p class="price">{{ offer.price }}€ HT</p>
+
+            <div class="container-flex">
+
+                {% if offer.coffee %}
+                    
+                        <div class="opt-container">
+                            <img src="{{ asset('assets/img/food.png') }}" alt="café" title="café" class="img-fluid">
+                        </div>
+
+                    
+                {% endif %}
+                {% if offer.printer %}
+                    
+                        <div class="opt-container">
+                            <img src="{{ asset('assets/img/print.png') }}" alt="imprimante" title="imprimante" class="img-fluid">
+                        </div>
+
+                    
+                {% endif %}
+                {% if offer.wireless %}
+                    
+                        <div class="opt-container">
+                            <img src="{{ asset('assets/img/router.png') }}" alt="wifi" title="wifi" class="img-fluid">
+                        </div>
+
+                    
+                {% endif %}
+                {% if offer.locker %}
+                    
+                        <div class="opt-container">
+                            <img src="{{ asset('assets/img/closet.png') }}" alt="casier" title="casier" class="img-fluid">
+                        </div>
+                    
+                {% endif %}
+                {% if offer.assignedOffice %}
+                    
+                        <div class="opt-container">
+                            <img src="{{ asset('assets/img/desk.png') }}" alt="bureau" title="bureau" class="img-fluid">
+                        </div>
+                    
+                {% endif %}
+            </div>
+            <button class="btn-formule"><a href="{{ path('booking_new') }}" >Je Réserve</a></button>
+        </div>
+    </div>
+{% endfor %}
+</section>
+
+{% endblock body %}
