@@ -16,6 +16,9 @@
         {{ form_widget(articleFormView.content, { 'attr': {'class': 'content_input'} }) }}
         </div>
         <div class="form-center">
+        {{ form_row(articleFormView.images) }}
+        </div>
+        <div class="form-center">
                 {{ form_errors(articleFormView.category) }}
                 {{ form_label(articleFormView.category) }}
                 {{ form_widget(articleFormView.category) }}

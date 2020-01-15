@@ -21,9 +21,9 @@
 
         {% for offer in offers %}
             <div class="list_row">
-                <div class="img_col"><p>test</p></div>
+                <div class="img_col"><img src="{{ asset('assets/uploaded_images/' ~ offer.images) }}" class="img-fluid" alt=""></div>
                 <div class="title_col">{{ offer.name }}</div>
-                <div class="content_col">{{ offer.description | slice(0, 50) }}</div>
+                <div class="content_col">{{ offer.description | slice(0, 250) }}</div>
                 <div class="title_col">{{ offer.price }}€ HT</div>
                 <div class="option_col">
                     {% if offer.coffee %}

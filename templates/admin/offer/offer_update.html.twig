@@ -20,6 +20,9 @@
         {{ form_label(offerFormView.price) }}
         {{ form_widget(offerFormView.price, { 'attr': {'class': 'title_input'} }) }}
     </div>
+    <div class="form-center">
+        {{ form_row(offerFormView.images) }}
+    </div>
     <div class="checkbox">
         <div>
             {{ form_errors(offerFormView.coffee) }}

@@ -7,6 +7,8 @@ use App\Form\OfferType;
 use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,27 +23,50 @@ class OfferController extends AbstractController
      * @Route("/admin-lacentrale/insert", name="admin_offer_insert_form")
      */
 
-    public function insertOfferForm(Request $request, EntityManagerInterface $entityManager)
+    public function new(Request $request, EntityManagerInterface $entityManager)
     {
-        $offer = new offer();
-        
-        $offerForm = $this->createForm(offerType::class, $offer);
-        if ($request->isMethod('Post')) {
-            $offerForm->handleRequest($request);
-            if ($offerForm->isValid()) {
-                $entityManager->persist($offer);
-                $entityManager->flush();
+        $offer = new Offer();
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('admin_offer_list');
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form['images']->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $offer->setImages($newFilename);
             }
+
+            $entityManager->persist($offer);
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('admin_offer_list'));
         }
 
-        $offerFormView = $offerForm->createView();
-        
         return $this->render('admin/offer/ajout_offer.html.twig', [
-            'offerFormView' => $offerFormView
+            'offerFormView' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/", name="offer_index", methods={"GET"})
@@ -85,30 +110,57 @@ class OfferController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/admin-lacentrale/offer/update/{id}", name="admin_offer_update")
      */
 
-    public function updateOfferForm(offerRepository $offerRepository, Request $request, EntityManagerInterface $entityManager, $id)
+    public function edit(offerRepository $offerRepository, Request $request, EntityManagerInterface $entityManager, $id)
     {
         $offer = $offerRepository->find($id);
-        $offerForm = $this->createForm(offerType::class, $offer);
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
         if ($request->isMethod('Post'))
         {
-            $offerForm->handleRequest($request);
-            if ($offerForm->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                /** @var UploadedFile $brochureFile */
+                $brochureFile = $form['images']->getData();
+
+                // this condition is needed because the 'brochure' field is not required
+                // so the PDF file must be processed only when a file is uploaded
+                if ($brochureFile) {
+                    $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $brochureFile->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+
+                    // updates the 'brochureFilename' property to store the PDF file name
+                    // instead of its contents
+                    $offer->setImages($newFilename);
+                }
+
                 $entityManager->persist($offer);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('admin_offer_list');
+                return $this->redirect($this->generateUrl('admin_offer_list'));
             }
 
         }
 
-        $offerFormView = $offerForm->createView();
+        $offerFormView = $form->createView();
 
         return $this->render('admin/offer/offer_update.html.twig', [
-            'offerFormView' => $offerFormView
+            'offerFormView' => $offerFormView,
         ]);
     }
 

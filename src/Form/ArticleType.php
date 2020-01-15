@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,6 +25,19 @@ class ArticleType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
                 'required' => true
+            ])
+            ->add('images', FileType::class, [
+                'label' => 'Brochure (PDF file)',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // everytime you edit the Product details
+                'required' => false
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
             ])
             // Je créé un nouveau champs de formulaire ce champs est pour la propriété 'catégorie'
             // vu que ce champs contient une relation vers une autre entité, le type choisi doit être EntityType

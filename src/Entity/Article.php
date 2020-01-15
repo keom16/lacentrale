@@ -29,6 +29,11 @@ class Article
     private $content;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $images;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="article")
      */
     private $category;
@@ -47,6 +52,17 @@ class Article
     {
         $this->title = $title;
 
+        return $this;
+    }
+
+    public function getImages(): ?string
+    {
+        return $this->images;
+    }
+
+    public function setImages(string $images): self
+    {
+        $this->images = $images;
         return $this;
     }
 

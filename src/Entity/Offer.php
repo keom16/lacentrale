@@ -63,6 +63,12 @@ class Offer
      */
     private $booking;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $images;
+
+
     public function __construct()
     {
         $this->booking = new ArrayCollection();
@@ -169,6 +175,21 @@ class Offer
 
         return $this;
     }
+
+    public function getImages(): ?string
+    {
+        return $this->images;
+    }
+    public function setImages(string $images): self
+    {
+        $this->images = $images;
+        return $this;
+    }
+    public function addImages(string $image): self
+    {
+        $this->images[] = $image;
+        return $this;
+    }
     
     /**
      * @return Collection|Booking[]
@@ -200,4 +221,5 @@ class Offer
 
         return $this;
     }
+
 }

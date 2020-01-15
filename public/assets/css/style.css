@@ -324,7 +324,7 @@ section h1{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 100px;
+    height: 200px;
 }
 
 .list_title h2:nth-child(4){

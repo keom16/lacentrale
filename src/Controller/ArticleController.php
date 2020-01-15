@@ -8,6 +8,8 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,45 +20,50 @@ class ArticleController extends AbstractController
      * @Route("/admin-lacentrale/article/insert", name="admin_article_insert_form")
      */
 
-    public function insertArticleForm(Request $request, EntityManagerInterface $entityManager)
+    public function new(Request $request, EntityManagerInterface $entityManager)
     {
-        // J'utilise le gabarit de formulaire pour créer mon formulaire
-        // j'envoie mon formulaire à un fichier twig
-        // et je l'affiche
-        // je crée un nouvel Article,
-        // en créant une nouvelle instance de l'entité Article
         $article = new Article();
-        // J'utilise la méthode createForm pour créer le gabarit / le constructeur de
-        // formulaire pour l'article: ArticleType (que j'ai généré en ligne de commandes)
-        // Et je lui associe mon entité Article vide
-        $articleForm = $this->createForm(ArticleType::class, $article);
-        // à partir de mon gabarit, je crée la vue de mon formulaire
-        if ($request->isMethod('Post')) {
-            // Je récupère les données de la requête (POST)
-            // et je les associe à mon formulaire
-            $articleForm->handleRequest($request);
-            // Si les données de mon formulaire sont valides
-            // (que les types rentrés dans les inputs sont bons,
-            // que tous les champs obligatoires sont remplis etc)
-            if ($articleForm->isValid()) {
-                // J'enregistre en BDD ma variable $article
-                // qui n'est plus vide, car elle a été remplie
-                // avec les données du formulaire
-                $entityManager->persist($article);
-                $entityManager->flush();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('admin_articles_list');
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form['images']->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $article->setImages($newFilename);
             }
 
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('admin_articles_list'));
         }
 
-        $articleFormView = $articleForm->createView();
-        // je retourne un fichier twig, et je lui envoie ma variable qui contient
-        // mon formulaire
         return $this->render('admin/article/ajout_article.html.twig', [
-            'articleFormView' => $articleFormView
+            'articleFormView' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/articleslist", name="articles_list");
@@ -127,27 +134,53 @@ class ArticleController extends AbstractController
     /**
      * @Route("/admin-lacentrale/article/update/{id}", name="admin_article_update")
      */
-    
-    public function updateArticleForm(ArticleRepository $articleRepository, Request $request, EntityManagerInterface $entityManager, $id)
+
+    public function edit(articleRepository $articleRepository, Request $request, EntityManagerInterface $entityManager, $id)
     {
         $article = $articleRepository->find($id);
-        $articleForm = $this->createForm(articleType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
         if ($request->isMethod('Post'))
         {
-            $articleForm->handleRequest($request);
-            if ($articleForm->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                /** @var UploadedFile $brochureFile */
+                $brochureFile = $form['images']->getData();
+
+                // this condition is needed because the 'brochure' field is not required
+                // so the PDF file must be processed only when a file is uploaded
+                if ($brochureFile) {
+                    $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $brochureFile->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+
+                    // updates the 'brochureFilename' property to store the PDF file name
+                    // instead of its contents
+                    $article->setImages($newFilename);
+                }
+
                 $entityManager->persist($article);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('admin_articles_list');
+                return $this->redirect($this->generateUrl('admin_articles_list'));
             }
 
         }
 
-        $articleFormView = $articleForm->createView();
+        $articleFormView = $form->createView();
 
         return $this->render('admin/article/article_update.html.twig', [
-            'articleFormView' => $articleFormView
+            'articleFormView' => $articleFormView,
         ]);
     }
 
